@@ -1,0 +1,10 @@
+venv/
+*.sqlite3
+database3.sqlite3
+AuthomatizationBusines/__pycache__
+customuser/__pycache__/
+main/__pycache__/
+media/
+debug.log
+AuthomatizationBusines/.env
+# git remote add origin https://github.com/Komil00/AuthomatizationBusines-.git
