@@ -7,4 +7,4 @@ main/__pycache__/
 media/
 debug.log
 AuthomatizationBusines/.env
-# git remote add origin https://github.com/Komil00/AuthomatizationBusines-.git
+static/

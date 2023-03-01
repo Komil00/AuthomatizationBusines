@@ -23,6 +23,7 @@ schema_view = get_schema_view(
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/', include('customuser.urls')),
+    path('api/v1/', include('main.urls')),
 
     # path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.authtoken')),
