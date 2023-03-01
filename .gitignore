@@ -8,3 +8,4 @@ media/
 debug.log
 AuthomatizationBusines/.env
 static/
+.idea/
