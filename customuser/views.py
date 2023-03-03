@@ -20,6 +20,7 @@ from rest_framework import permissions
 from customuser.emails import send_code_to_email
 from AuthomatizationBusines import settings
 
+
 class AuthorOrReadOnly(permissions.BasePermission):
 
     def has_permission(self, request, view):
@@ -40,6 +41,7 @@ class UsersViewList(generics.ListAPIView):
     permission_classes = [IsAdminUser]
     queryset = CustomUser.objects.all()
     serializer_class = CustomUserListSerializer
+
 
 # class UserView(generics.RetrieveUpdateAPIView):
 #     queryset = CustomUser.objects.all()
@@ -84,20 +86,22 @@ class MeViewSet(viewsets.ModelViewSet):
             return super().destroy(request, *args, **kwargs)
         else:
             return Response(status=405)
-    
+
     def get_serializer_class(self):
         if self.action in ['list']:
             return MeSerializers
         else:
             return MePutPatchDeleteSerializers
-  
+
     def get_queryset(self):
         return CustomUser.objects.filter(username=self.request.user.username)
+
 
 class UsersVerifyApiView(viewsets.ModelViewSet):
     queryset = CustomUser.objects.all()
     serializer_class = CustomUserVerifyCodeSerializer
     http_method_names = ['post']
+
     def create(self, request):
         data = request.data
         serializer = CustomUserVerifyCodeSerializer(data=data)
@@ -107,22 +111,22 @@ class UsersVerifyApiView(viewsets.ModelViewSet):
             user = CustomUser.objects.filter(email=email)
             if not user.exists():
                 return Response({
-                'status' : 400,
-                'message' : 'something went wrong',
-                'data' : 'invalid email'
+                    'status': 400,
+                    'message': 'something went wrong',
+                    'data': 'invalid email'
                 })
             if user.first().code != code:
                 return Response({
-                'status' : 400,
-                'message' : 'something went wrong',
-                'data' : 'invalid code' 
+                    'status': 400,
+                    'message': 'something went wrong',
+                    'data': 'invalid code'
                 })
             user = user.first()
             user.is_verify = True
             user.save()
 
             return Response({
-                'status' : 200,
-                'message' : 'account verified',
-                'data' : {} 
-                })
+                'status': 200,
+                'message': 'account verified',
+                'data': {}
+            })
