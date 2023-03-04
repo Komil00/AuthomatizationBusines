@@ -1,6 +1,7 @@
 from pathlib import Path
 import os
 import environ
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -16,13 +17,12 @@ DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = ['*']
 
-
 # Application definition
 
 INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
 
-    'jazzmin', # admin restayling
+    'jazzmin',  # admin restayling
     'django.contrib.admin',
 
     'django.contrib.auth',
@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'djoser',
     'django_filters',
     'corsheaders',
-    "debug_toolbar",# toolbar
+    "debug_toolbar",  # toolbar
 
     'django_celery_results',
     'django_celery_beat',
@@ -76,14 +76,13 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
             ],
             'libraries': {
-                'staticfiles': 'django.templatetags.static', # agar bumasa swagger ishlamaydi
+                'staticfiles': 'django.templatetags.static',  # agar bumasa swagger ishlamaydi
             }
         },
     },
 ]
 
 WSGI_APPLICATION = 'AuthomatizationBusines.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
@@ -100,13 +99,23 @@ WSGI_APPLICATION = 'AuthomatizationBusines.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'f_db',
+        'USER': 'f_db_user',
+        'PASSWORD': 'f_db_0102',
+        'HOST': 'f_db',
+        'PORT': '5432',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -126,7 +135,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
@@ -137,7 +145,6 @@ TIME_ZONE = 'Asia/Tashkent'
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/

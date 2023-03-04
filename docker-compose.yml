@@ -1,0 +1,36 @@
+version: '3.7'
+
+services:
+  f_crm:
+    build:
+      context: .
+    container_name: f_crm
+    restart: always
+    volumes:
+      - .:/app
+      - static:/app/static
+      - media:/app/media
+    ports:
+      - '8000:8000'
+    command: python manage.py runserver 0.0.0.0:8000
+    env_file:
+      - AuthomatizationBusines/.env
+    depends_on:
+      - f_db
+  f_db:
+    image: postgres
+    environment:
+      POSTGRES_USER: f_db_user
+      POSTGRES_DB: f_db
+      POSTGRES_PASSWORD: f_db_0102
+    ports:
+      - '5433:5432'
+#    command:
+#      - python manage.py migrate
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  static:
+  media:
+  pgdata:
